@@ -1,4 +1,4 @@
-package com.example.shoppingmall.domain;
+package com.example.shoppingmall.dto;
 
 import lombok.Builder;
 import lombok.Getter;

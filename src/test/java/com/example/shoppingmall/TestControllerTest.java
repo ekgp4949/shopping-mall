@@ -1,7 +1,7 @@
 package com.example.shoppingmall;
 
 import com.example.shoppingmall.Test.TestController;
-import com.example.shoppingmall.domain.UserDto;
+import com.example.shoppingmall.dto.UserDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
