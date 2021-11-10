@@ -2,6 +2,8 @@ package com.example.shoppingmall.repository;
 
 import com.example.shoppingmall.constant.ItemSellStatus;
 import com.example.shoppingmall.entity.Item;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +21,33 @@ class ItemRepositoryTest {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @BeforeEach
+    public void setUp() {
+        for(int i = 0; i < 10; i++) {
+            Item item = new Item();
+            item.setItemNm("test");
+            item.setPrice(1000);
+            item.setItemDetail("testDetail"+i);
+            item.setItemSellStatus(ItemSellStatus.SELL);
+            item.setStockNumber(100);
+            item.setRegiDt(LocalDateTime.now());
+            item.setUpdaDt(LocalDateTime.now());
+            itemRepository.save(item);
+        }
+    }
+
+    @AfterEach
+    public void destroy() {
+        itemRepository.deleteAll();
+    }
+
+    @Test
+    @DisplayName("findByItem 테스트")
+    public void findByItemNmTest() {
+        List<Item> list = itemRepository.findByItemNm("test");
+        assertEquals(list.size(), 10);
+    }
 
     @Test
     @DisplayName("상품 저장 테스트")
