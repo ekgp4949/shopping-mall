@@ -43,10 +43,20 @@ class ItemRepositoryTest {
     }
 
     @Test
-    @DisplayName("findByItem 테스트")
+    @DisplayName("findByItemNm 테스트")
     public void findByItemNmTest() {
         List<Item> list = itemRepository.findByItemNm("test");
         assertEquals(list.size(), 10);
+    }
+
+    @Test
+    @DisplayName("findByItemNmOrItemDetailTest 테스트")
+    public void findByItemNmOrItemDetailTest() {
+        List<Item> itemList = itemRepository.findAll();
+        for(int i = 0; i < 10; i++) {
+            assertEquals(itemList.get(i),
+                    itemRepository.findByItemNmOrItemDetail(null, itemList.get(i).getItemDetail()).get(0));
+        }
     }
 
     @Test
