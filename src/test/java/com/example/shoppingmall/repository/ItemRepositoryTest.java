@@ -88,4 +88,14 @@ class ItemRepositoryTest {
             assertTrue(item.getPrice() < 5000 );
         }
     }
+
+    @Test
+    @DisplayName("findByPriceLessThanOrderByPriceDesc 테스트")
+    public void findByPriceLessThanOrderByPriceDescTest() {
+        List<Item> list = itemRepository.findByPriceLessThanOrderByPriceDesc(5000);
+        for(Item item : list) {
+            assertTrue(item.getPrice() < 5000 );
+        }
+        assertEquals(4000, list.get(0).getPrice());
+    }
 }
