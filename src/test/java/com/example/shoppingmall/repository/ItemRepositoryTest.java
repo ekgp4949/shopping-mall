@@ -27,7 +27,7 @@ class ItemRepositoryTest {
         for(int i = 0; i < 10; i++) {
             Item item = new Item();
             item.setItemNm("test");
-            item.setPrice(1000);
+            item.setPrice(1000*i);
             item.setItemDetail("testDetail"+i);
             item.setItemSellStatus(ItemSellStatus.SELL);
             item.setStockNumber(100);
@@ -78,5 +78,14 @@ class ItemRepositoryTest {
         assertEquals(findedItem.getPrice(), item.getPrice());
         assertEquals(findedItem.getItemSellStatus(), item.getItemSellStatus());
         assertEquals(findedItem.getItemDetail(), item.getItemDetail());
+    }
+
+    @Test
+    @DisplayName("findByPriceLessThanTest 테스트")
+    public void findByPriceLessThanTest() {
+        List<Item> list = itemRepository.findByPriceLessThan(5000);
+        for(Item item : list) {
+            assertTrue(item.getPrice() < 5000 );
+        }
     }
 }
