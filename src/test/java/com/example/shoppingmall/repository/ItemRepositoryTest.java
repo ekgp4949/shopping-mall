@@ -24,7 +24,7 @@ class ItemRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 11; i++) {
             Item item = new Item();
             item.setItemNm("test");
             item.setPrice(1000*i);
@@ -97,5 +97,13 @@ class ItemRepositoryTest {
             assertTrue(item.getPrice() < 5000 );
         }
         assertEquals(4000, list.get(0).getPrice());
+    }
+
+    @Test
+    @DisplayName("@Query를 이용한 findByItemDetail Test")
+    public void findByItemDetailTest() {
+        List<Item> list = itemRepository.findByItemDetail("testDetail1");
+        assertEquals(list.size(), 2);
+        assertEquals(list.get(0).getItemDetail(), "testDetail10");
     }
 }
